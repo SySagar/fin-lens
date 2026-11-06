@@ -75,7 +75,8 @@ export function FlowTable({
   rows: CdslPeriod[];
   selectedKey: string | null;
 }) {
-  const { formatFlow } = useUnits();
+  const { formatFlow, unit } = useUnits();
+  const decimals = unit === "crore" ? 0 : 2;
   const [sort, setSort] = useState<SortState>({
     key: "period",
     direction: "asc",
@@ -187,7 +188,7 @@ export function FlowTable({
                       : "text-negative"
                   }`}
                 >
-                  {formatFlow(row.values.total, 0)}
+                  {formatFlow(row.values.total, decimals)}
                 </td>
               </tr>
             );
@@ -203,10 +204,10 @@ export function FlowTable({
 }
 
 function Cell({ value }: { value: number }) {
-  const { formatFlow } = useUnits();
+  const { formatFlow, unit } = useUnits();
   return (
     <td className="px-3 py-3 text-right tabular-nums whitespace-nowrap text-muted-foreground">
-      {formatFlow(value, 0)}
+      {formatFlow(value, unit === "crore" ? 0 : 2)}
     </td>
   );
 }

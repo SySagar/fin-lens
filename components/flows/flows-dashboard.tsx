@@ -388,7 +388,7 @@ export function FlowsDashboard({
                       FII/FPI vs DII trading activity · capital-market segment
                     </p>
                   </div>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                  <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     {formatDate(nse.asOf)}
                   </span>
                 </div>
@@ -427,9 +427,14 @@ export function FlowsDashboard({
                 <h2 className="text-sm font-semibold">
                   {data.period === "monthly" ? "Monthly" : "Quarterly"} detail
                 </h2>
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                  {unit === "crore" ? "INR crore" : "USD billion"}
-                </span>
+                <div className="ml-auto flex items-center gap-3">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                    {unit === "crore" ? "INR crore" : "USD billion"}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:hidden">
+                    Scroll →
+                  </span>
+                </div>
               </div>
 
               <FlowTable rows={data.rows} selectedKey={selected.key} />
@@ -568,7 +573,8 @@ function Methodology() {
           <dt className="font-medium text-foreground">Currency conversion</dt>
           <dd className="mt-1">
             USD values use the latest RBI reference rate shown above, not a
-            period-average rate. Historical USD figures are indicative only.
+            period-average rate. Historical USD figures are indicative only,
+            and small values may round to zero at two decimal places.
           </dd>
         </div>
       </dl>

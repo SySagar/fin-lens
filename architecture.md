@@ -27,7 +27,7 @@ Keep CDSL and NSE results as separate selectable views with a visible source/met
 1. A server-side source adapter fetches the official CDSL report or NSE CSV; browser clients do not fetch those sites directly.
 2. Parse and validate the response, normalize values to INR crore and the period/participant/asset-class dimensions, and retain the source URL and retrieval timestamp.
 3. Expose the normalized result through a Next.js route handler such as `/api/flows?source=cdsl|nse&period=monthly|quarterly&year=YYYY`.
-4. Cache/revalidate responses (initially around one hour) and show the source's as-of date. If retrieval or parsing fails, show an explicit stale/unavailable state rather than fabricated values.
+4. Cache/revalidate responses (CDSL for up to 30 minutes, NSE for up to 5 minutes) and show the source's as-of date plus retrieval freshness. If retrieval or parsing fails, show an explicit unavailable state rather than fabricated values.
 5. Present data in a table and a chart with a zero baseline so net inflows and outflows are clear.
 
 Suggested normalized observation: `periodStart`, `periodEnd`, `periodLabel`, `source`, `participant`, optional `assetClass`, `netINRCrore`, optional `grossPurchaseINRCrore`/`grossSaleINRCrore`, `sourceUrl`, and `fetchedAt`.
@@ -57,4 +57,4 @@ No database is needed for the first version: retrieve and cache official sources
 
 ## Initial data-page behavior
 
-The page defaults to the NSE view for a direct FII/FPI-versus-DII comparison, with monthly/quarterly controls and an INR-crore net-flow chart/table. A CDSL view provides its richer FPI/FII categories and official monthly/quarterly totals. Keep chart and table aligned with the selected source, period, and year. No authentication, user data, database, or other metrics are in v1.
+The page defaults to the CDSL monthly view for historical FPI/FII net investment, with monthly/quarterly, month/quarter, and year controls, a chart, and a sortable table. CDSL provides the richer FPI/FII category breakdown and official monthly/quarterly totals. A separate NSE card shows the latest-session FII/FPI versus DII trading activity; it is not merged into the CDSL chart or totals because the coverage differs. No authentication, user data, database, or other metrics are in v1.

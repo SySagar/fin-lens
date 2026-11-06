@@ -30,11 +30,25 @@ export function FlowChart({
 }) {
   const { convert, formatFlow, unit } = useUnits();
 
-  const tickFormatter = (value: number) =>
-    new Intl.NumberFormat(unit === "crore" ? "en-IN" : "en-US", {
-      notation: "compact",
-      maximumFractionDigits: 1,
-    }).format(convert(value));
+  const tickFormatter = (value: number) => {
+    const converted = convert(value);
+
+    if (unit === "usd-billion") {
+      return new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 1,
+      }).format(converted);
+    }
+
+    if (Math.abs(converted) >= 1000) {
+      return `${new Intl.NumberFormat("en-IN", {
+        maximumFractionDigits: 1,
+      }).format(converted / 1000)}k`;
+    }
+
+    return new Intl.NumberFormat("en-IN", {
+      maximumFractionDigits: 0,
+    }).format(converted);
+  };
 
   return (
     <div
@@ -94,6 +108,7 @@ export function FlowChart({
               fill="var(--primary)"
               radius={[3, 3, 0, 0]}
               maxBarSize={30}
+              isAnimationActive={false}
             />
             <Bar
               dataKey="debt"
@@ -101,6 +116,7 @@ export function FlowChart({
               fill="var(--secondary)"
               radius={[3, 3, 0, 0]}
               maxBarSize={30}
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
@@ -110,6 +126,7 @@ export function FlowChart({
               strokeWidth={2}
               dot={false}
               activeDot={{ r: 4 }}
+              isAnimationActive={false}
             />
           </ComposedChart>
         </ResponsiveContainer>
