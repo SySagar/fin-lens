@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { DataFreshness } from "@/components/flows/data-freshness";
 import { FlowChart, type FlowPoint } from "@/components/flows/flow-chart";
 import { FlowTable } from "@/components/flows/flow-table";
 import { UnitToggle } from "@/components/unit-toggle";
@@ -170,7 +171,7 @@ export function FlowsDashboard({
   return (
     <main id="main" className="flex flex-1 flex-col">
       <section className="border-b border-border">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10 lg:flex-row lg:items-start lg:justify-between">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
@@ -210,7 +211,7 @@ export function FlowsDashboard({
                     id="reporting-month"
                     value={Math.min(month, maxMonth)}
                     onChange={(event) => setMonth(Number(event.target.value))}
-                    className="appearance-none rounded-lg border border-border bg-transparent py-1 pr-8 pl-1 text-4xl font-semibold tracking-tight text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-5xl"
+                    className="appearance-none rounded-lg border border-border bg-transparent py-1 pr-8 pl-1 text-3xl font-semibold tracking-tight text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-5xl"
                   >
                     {MONTHS.slice(0, maxMonth + 1).map((name, index) => (
                       <option key={name} value={index}>
@@ -229,7 +230,7 @@ export function FlowsDashboard({
                     id="reporting-quarter"
                     value={Math.min(quarter, maxQuarter)}
                     onChange={(event) => setQuarter(Number(event.target.value))}
-                    className="appearance-none rounded-lg border border-border bg-transparent py-1 pr-8 pl-1 text-4xl font-semibold tracking-tight text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-5xl"
+                    className="appearance-none rounded-lg border border-border bg-transparent py-1 pr-8 pl-1 text-2xl font-semibold tracking-tight text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-5xl"
                   >
                     {QUARTERS.slice(0, maxQuarter + 1).map((name, index) => (
                       <option key={name} value={index}>
@@ -249,7 +250,7 @@ export function FlowsDashboard({
                   id="reporting-year"
                   value={year}
                   onChange={(event) => setYear(Number(event.target.value))}
-                  className="appearance-none rounded-lg border border-border bg-transparent py-1 pr-8 pl-1 text-4xl font-semibold tracking-tight text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-5xl"
+                  className="appearance-none rounded-lg border border-border bg-transparent py-1 pr-8 pl-1 text-3xl font-semibold tracking-tight text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-5xl"
                 >
                   {years.map((value) => (
                     <option key={value} value={value}>
@@ -286,12 +287,21 @@ export function FlowsDashboard({
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
+      <section
+        aria-busy={loading}
+        className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6"
+      >
         {loading ? (
           <LoadingState />
         ) : error ? (
           <ErrorState
             message={error}
+            onRetry={() => setReloadKey((key) => key + 1)}
+          />
+        ) : data && data.rows.length === 0 ? (
+          <EmptyState
+            year={year}
+            period={view}
             onRetry={() => setReloadKey((key) => key + 1)}
           />
         ) : data && selected ? (
@@ -306,14 +316,17 @@ export function FlowsDashboard({
                   {asOf ? `as of ${asOf}` : `calendar year ${year}`}
                 </p>
               </div>
-              <a
-                href={data.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-medium text-primary underline-offset-4 hover:underline"
-              >
-                View CDSL source ↗
-              </a>
+              <div className="flex flex-col items-start gap-1 sm:items-end">
+                <a
+                  href={data.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-sm text-xs font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  View CDSL source ↗
+                </a>
+                <DataFreshness fetchedAt={data.fetchedAt} />
+              </div>
             </div>
 
             <div className="mt-5 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
@@ -344,12 +357,23 @@ export function FlowsDashboard({
                     Equity and debt bars; total net flow line.
                   </p>
                 </div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                  {unit === "crore" ? "INR crore" : "USD billion"}
-                </span>
+                <div className="flex items-center gap-3">
+                  <a
+                    href="#flows-table"
+                    className="rounded-sm text-[11px] font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    Skip to table ↓
+                  </a>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                    {unit === "crore" ? "INR crore" : "USD billion"}
+                  </span>
+                </div>
               </div>
               <div className="px-2 py-4 sm:px-4">
-                <FlowChart points={chartPoints} />
+                <FlowChart
+                  points={chartPoints}
+                  label={`Net FPI/FII flows by ${data.period} for ${year}`}
+                />
               </div>
             </div>
 
@@ -395,7 +419,10 @@ export function FlowsDashboard({
               </div>
             ) : null}
 
-            <div className="mt-6 overflow-hidden rounded-xl border border-border bg-card">
+            <div
+              id="flows-table"
+              className="mt-6 scroll-mt-24 overflow-hidden rounded-xl border border-border bg-card"
+            >
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-5 py-4">
                 <h2 className="text-sm font-semibold">
                   {data.period === "monthly" ? "Monthly" : "Quarterly"} detail
@@ -414,7 +441,7 @@ export function FlowsDashboard({
                     href={data.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium text-foreground underline-offset-4 hover:underline"
+                    className="rounded-sm font-medium text-foreground underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     CDSL FPI/FII reports
                   </a>
@@ -427,6 +454,8 @@ export function FlowsDashboard({
                 {data.notes[0] ? <p className="mt-1">{data.notes[0]}</p> : null}
               </div>
             </div>
+
+            <Methodology />
           </>
         ) : null}
       </section>
@@ -460,6 +489,93 @@ function Metric({
   );
 }
 
+function EmptyState({
+  year,
+  period,
+  onRetry,
+}: {
+  year: number;
+  period: View;
+  onRetry: () => void;
+}) {
+  return (
+    <div
+      role="status"
+      className="rounded-xl border border-border bg-card p-10 text-center"
+    >
+      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+        No observations
+      </p>
+      <h2 className="mt-3 text-xl font-semibold tracking-tight">
+        No {period} data for {year}
+      </h2>
+      <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+        CDSL has not published {period} figures for this year yet. Try another
+        period, or retry if you expected data to be available.
+      </p>
+      <button
+        type="button"
+        onClick={onRetry}
+        className="mt-5 inline-flex h-10 items-center rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+
+function Methodology() {
+  return (
+    <section
+      aria-labelledby="methodology-heading"
+      className="mt-6 rounded-xl border border-border bg-card px-5 py-5"
+    >
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 id="methodology-heading" className="text-sm font-semibold">
+          Methodology &amp; coverage
+        </h2>
+        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          Read before comparing
+        </span>
+      </div>
+
+      <dl className="mt-4 grid gap-4 text-xs leading-relaxed text-muted-foreground sm:grid-cols-2">
+        <div>
+          <dt className="font-medium text-foreground">CDSL series</dt>
+          <dd className="mt-1">
+            Monthly and quarterly FPI/FII net investment compiled by CDSL from
+            custodian and depository reports. The latest period is provisional
+            and reflects trades up to the previous trading day.
+          </dd>
+        </div>
+        <div>
+          <dt className="font-medium text-foreground">Category coverage</dt>
+          <dd className="mt-1">
+            Debt-FAR, mutual fund, and AIF categories were included from
+            September 2024. Earlier periods do not have the same breakdown, so
+            compare asset-class columns with care.
+          </dd>
+        </div>
+        <div>
+          <dt className="font-medium text-foreground">NSE snapshot</dt>
+          <dd className="mt-1">
+            The latest-session card shows FII/FPI and DII cash-market trading
+            activity. It is a different measure from CDSL investment flows and
+            is not included in the chart totals.
+          </dd>
+        </div>
+        <div>
+          <dt className="font-medium text-foreground">Currency conversion</dt>
+          <dd className="mt-1">
+            USD values use the latest RBI reference rate shown above, not a
+            period-average rate. Historical USD figures are indicative only.
+          </dd>
+        </div>
+      </dl>
+    </section>
+  );
+}
+
 function LoadingState() {
   return (
     <div aria-busy="true" aria-live="polite" className="space-y-6">
@@ -487,7 +603,10 @@ function ErrorState({
   onRetry: () => void;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-10 text-center">
+    <div
+      role="alert"
+      className="rounded-xl border border-border bg-card p-10 text-center"
+    >
       <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-negative">
         Source unavailable
       </p>
