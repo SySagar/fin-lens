@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+
+  /* Warm paper light theme */
+  --background: #faf5ec;
+  --foreground: #2a2118;
+  --card: #fffcf5;
+  --muted: #f1e8d9;
+  --muted-foreground: #6b5d4c;
+  --border: #e6dac7;
+
+  --primary: #a34d1f;
+  --primary-foreground: #fff9f2;
+  --secondary: #5f6f2a;
+  --secondary-foreground: #fbfdf5;
+  --tertiary: #9a6a12;
+  --tertiary-foreground: #fffaf0;
+
+  --positive: #2f7d4f;
+  --negative: #b3382c;
+
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Dracula-inspired dark theme (not pure black) */
+  --background: #282a36;
+  --foreground: #f8f8f2;
+  --card: #2f3244;
+  --muted: #343746;
+  --muted-foreground: #bcc4e0;
+  --border: #44475a;
+
+  --primary: #bd93f9;
+  --primary-foreground: #21222c;
+  --secondary: #ff79c6;
+  --secondary-foreground: #21222c;
+  --tertiary: #8be9fd;
+  --tertiary-foreground: #21222c;
+
+  --positive: #50fa7b;
+  --negative: #ff5555;
+
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
