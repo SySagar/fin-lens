@@ -35,13 +35,13 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            A clear view of foreign and domestic institutional money moving
-            through Indian markets — without the noise.
+            A clear view of economy and investments in Indian markets — without
+            the noise.
           </p>
 
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Track FII/FPI and DII net investment across monthly and quarterly
-            periods, sourced from official depository and exchange reports.
+            Follow the numbers behind Indian markets through focused views,
+            useful context, and transparent sources.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -80,9 +80,6 @@ export default function HomePage() {
               together so the answer is easy to see.
             </p>
           </div>
-          <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-            Version 0.1
-          </span>
         </div>
 
         <dl className="mt-10 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">

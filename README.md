@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fin Lens
 
-## Getting Started
+**A clear view of economy and investments in Indian markets — without the noise.**
 
-First, run the development server:
+![Ver. 1](https://img.shields.io/badge/Ver.-1-b45320)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Fin Lens is a small, read-only website for following the Indian economy and its
+markets. It turns official, published data into clean, comparable views, so you
+can see what is actually happening without sifting through commentary, clutter,
+or conflicting headlines.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Fin Lens home page](./public/readme/home.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What it is
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Most financial information is either buried in long reports or wrapped in
+opinion. Fin Lens takes the opposite approach: show the numbers, show where they
+came from, and let the picture speak for itself.
 
-## Learn More
+The goal is a calm, dependable place to check the state of Indian markets — the
+kind of page you can open, read in a few seconds, and trust.
 
-To learn more about Next.js, take a look at the following resources:
+## What's inside
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **A clear, low-noise view.** Focused pages built around one question at a time
+  instead of an endless stream of headlines and tickers.
+- **Comparable periods.** Switch between time ranges to see how a measure
+  changes, rather than looking at a single isolated figure.
+- **Charts and tables together.** Read the trend visually, then check the exact
+  numbers behind every bar and period.
+- **Official sources, always visible.** Data comes from published official
+  reports, with the source, as-of date, and retrieval time kept in view.
+- **Flexible units.** View figures in INR or USD, depending on what you need.
+- **Light and dark themes.** A reading experience that adapts to your
+  preference.
+- **Responsive and accessible.** Usable from mobile to desktop, with keyboard
+  navigation, clear states, and sensible defaults.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![Fin Lens data dashboard](./public/readme/dashboard.png)
 
-## Deploy on Vercel
+## More about Fin Lens
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [About Fin Lens](./app/about/page.tsx) — the purpose and principles behind the site.
+- [Data & sources](./app/data/page.tsx) — official sources and the data each one provides.
+- [GitHub repository](https://github.com/SySagar/fin-lens) — project updates and source code.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Current focus
+
+Version 1 looks at **institutional investment flows in Indian markets** —
+foreign and domestic institutions moving money in and out — sourced from official
+depository and exchange reports. The foundation is intentionally generic: more
+economy and investment datasets will be added over time, and the existing views
+will keep the same clarity-first approach.
+
+## Principles
+
+- **Clarity over noise** — fewer, better-organised numbers.
+- **Provenance over opinion** — every figure shows where it came from.
+- **Comparability over drama** — periods and units you can actually compare.
+- **Calm by default** — no clutter, no hype, no false precision.
+
+## Disclaimer
+
+Fin Lens is an informational project, not investment advice. Data is compiled
+from public official sources and may lag, change, or contain errors. Always
+verify figures against the original source before making any decision.
+
+## Copyright
+
+© 2026 Sagar. All rights reserved.

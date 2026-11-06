@@ -17,6 +17,9 @@ export function SiteHeader() {
           <span className="text-[15px] font-semibold tracking-tight">
             Fin Lens
           </span>
+          <span className="rounded-full border border-border px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
+            Ver. 1
+          </span>
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-4">
