@@ -5,6 +5,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { UnitsProvider } from "@/components/units-provider";
+import { PwaRegister } from "@/components/pwa-register";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +23,16 @@ export const metadata: Metadata = {
     template: "%s · Fin Lens",
   },
   description:
-    "Track foreign and domestic institutional investment in Indian markets, with monthly and quarterly FII/FPI and DII data from official sources.",
+    "A clear view of economy and investments in Indian markets — without the noise.",
+  applicationName: "Fin Lens",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Fin Lens",
+  },
+  icons: {
+    apple: "/icons/apple-touch-icon.png",
+  },
 };
 
 const themeScript = `(function(){try{var s=localStorage.getItem('fin-lens-theme');var d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.classList.toggle('dark',d);r.style.colorScheme=d?'dark':'light';}catch(e){}})();`;
@@ -40,6 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {themeScript}
         </Script>
         <UnitsProvider>
+          <PwaRegister />
           <a
             href="#main"
             className="sr-only rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]"

@@ -4,6 +4,10 @@
 
 ![Ver. 1](https://img.shields.io/badge/Ver.-1-b45320)
 
+Fin Lens can be installed on a phone from its browser. On Android, choose
+**Install app** in the footer (or use the browser's install option). On iPhone or
+iPad, open the site in Safari, tap **Share**, then choose **Add to Home Screen**.
+
 Fin Lens is a small, read-only website for following the Indian economy and its
 markets. It turns official, published data into clean, comparable views, so you
 can see what is actually happening without sifting through commentary, clutter,

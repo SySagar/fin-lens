@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { InstallApp } from "@/components/install-app";
 
 export function SiteFooter() {
   return (
@@ -30,6 +31,9 @@ export function SiteFooter() {
             X · @SySagar2
           </Link>
         </nav>
+        <div className="sm:col-start-2 sm:justify-self-end">
+          <InstallApp />
+        </div>
       </div>
     </footer>
   );
