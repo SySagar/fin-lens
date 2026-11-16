@@ -16,8 +16,8 @@ const features = [
   {
     label: "03",
     tone: "text-tertiary",
-    title: "Chart and table",
-    body: "Scan the trend visually, then read the exact figures behind every bar and period.",
+    title: "Economy and markets",
+    body: "Explore institutional flows and official inflation indicators through clear charts and tables.",
   },
 ];
 
@@ -51,6 +51,12 @@ export default function HomePage() {
             >
               Explore FII / DII data
             </Link>
+            <Link
+              href="/inflation"
+              className="inline-flex h-11 items-center justify-center rounded-lg border border-border px-6 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+            >
+              Explore inflation data
+            </Link>
             <a
               href="#about"
               className="inline-flex h-11 items-center justify-center rounded-lg border border-border px-6 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
@@ -75,9 +81,8 @@ export default function HomePage() {
               One question, answered clearly
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              Who is buying and selling Indian equities — foreign investors or
-              domestic institutions? Fin Lens brings the reported numbers
-              together so the answer is easy to see.
+              How are prices changing across India, and who is buying and selling
+              Indian equities? Fin Lens brings official data into focused views.
             </p>
           </div>
         </div>

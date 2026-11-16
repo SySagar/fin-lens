@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const links = [
   { href: "/", label: "Home", exact: true },
   { href: "/fii-dii", label: "FII / DII", exact: false },
+  { href: "/inflation", label: "Inflation", exact: false },
 ];
 
 export function SiteNav() {

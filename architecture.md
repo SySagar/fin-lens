@@ -2,12 +2,13 @@
 
 ## Product
 
-A small, read-only Next.js website for finance and economics. Working project name: **Fin Lens**. Version one has a landing page and one FII/DII data page.
+A small, read-only Next.js website for finance and economics. Working project name: **Fin Lens**. It includes institutional flows and an India inflation tracker built from official publications.
 
 ## Routes and shared UI
 
 - `/` — project name, brief description, and a clear link to the data page.
 - `/fii-dii` — data-source selector, monthly/quarterly view, chart, and table.
+- `/inflation` — official CPI, CFPI, WPI, and labour-index time series with index, YoY, MoM, geography, base-year, and source details.
 - Shared site header/navigation and footer on both routes. Footer: `© 2026 Sagar` and a link to [@SySagar2](https://x.com/SySagar2).
 
 Use the Next.js App Router with TypeScript and Tailwind CSS. Use shadcn/ui for accessible navigation, tabs/selectors, cards, and table styling, and Recharts for the flow chart. Keep the page components focused on presentation; put source retrieval and normalization in server-side modules.

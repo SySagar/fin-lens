@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Fin Lens — FII/DII flows in Indian markets",
+    default: "Fin Lens — Indian markets and economy",
     template: "%s · Fin Lens",
   },
   description:

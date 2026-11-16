@@ -50,11 +50,11 @@ kind of page you can open, read in a few seconds, and trust.
 
 ## Current focus
 
-Version 1 looks at **institutional investment flows in Indian markets** —
-foreign and domestic institutions moving money in and out — sourced from official
-depository and exchange reports. The foundation is intentionally generic: more
-economy and investment datasets will be added over time, and the existing views
-will keep the same clarity-first approach.
+Fin Lens follows **institutional investment flows** and **Indian inflation**.
+The FII/DII tracker uses official depository and exchange reports; the inflation
+tracker uses official MoSPI, Office of the Economic Adviser, and Labour Bureau
+publications. More economy and investment datasets will be added over time, with
+the same clarity-first approach.
 
 ## Principles
 
